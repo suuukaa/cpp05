@@ -14,6 +14,7 @@ class Form{
 		Form();
 		Form(const Form &copy);
 		Form(const std::string& name, int gradeToSign, int gradeToExecute);
+		Form &operator=(const Form &copy);
 		~Form();
 
 		const std::string& getName() const;
