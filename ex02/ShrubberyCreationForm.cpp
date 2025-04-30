@@ -1,30 +1,42 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), target("Default"){}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
+    : AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-ShrubberyCreationForm::~ShrubberyCreationForm(){}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+    : AForm(other), _target(other._target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) : AForm(copy), target(target,copy){}
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+{
+    (void)other;
+    return *this;
+}
 
-ShrubberyCreationForm::execute() const {
-    std::string target_file = this->target + _shrubbery;
-    std::ofstream file(target_file.c_str);
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-    if (file.fail()){
-        std::cout << "oops file isn't open :)" << std::endl;
-        return ;}
-    else{
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+{
+    if (!getIsSigned())
+        throw AForm::FormNotSignedException();
+    if (executor.getGrade() > getExecGrade())
+        throw AForm::GradeTooLowException();
 
-    ofs << "      /\\      " << std::endl;
-    ofs << "     /\\*\\     " << std::endl;
-    ofs << "    /\\O\\*\\    " << std::endl;
-    ofs << "   /*/\\/\\/\\   " << std::endl;
-    ofs << "  /\\O\\/\\*\\/\\  " << std::endl;
-    ofs << " /\\*\\/\\*\\/\\/\\ " << std::endl;
-    ofs << "/\\O\\/\\/*/\\/O/\\" << std::endl;
-    ofs << "      ||      " << std::endl;
-    ofs << "      ||      " << std::endl;
-    ofs << "      ||      " << std::endl;
+    std::ofstream file((_target + "_shrubbery").c_str());
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file." << std::endl;
+        return;
     }
+
+    file << "      /\\      " << std::endl;
+    file << "     /\\*\\     " << std::endl;
+    file << "    /\\O\\*\\    " << std::endl;
+    file << "   /*/\\/\\/\\   " << std::endl;
+    file << "  /\\O\\/\\*\\/\\  " << std::endl;
+    file << " /\\*\\/\\*\\/\\/\\ " << std::endl;
+    file << "/\\O\\/\\/*/\\/O/\\" << std::endl;
+    file << "      ||      " << std::endl;
+    file << "      ||      " << std::endl;
+    file << "      ||      " << std::endl;
+
     file.close();
 }

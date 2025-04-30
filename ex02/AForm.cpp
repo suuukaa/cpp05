@@ -37,8 +37,11 @@ int AForm::gradeToSign() const{
     return gradeToSign;
 }
 
-void AForm::beSigned(const Bureaucrat &b){
-    if 
+void AForm::beSigned(const Bureaucrat &b)
+{
+    if (b.getGrade() > _signgradeToSignGrade)
+        throw GradeTooLowException();
+        isSigned = true;
 }
 
 const char* AForm::GradeTooHighException::what() const throw(){

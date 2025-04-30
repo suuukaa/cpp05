@@ -13,7 +13,7 @@ class ShrubberyCreationForm : public AForm{
     ShrubberyCreationForm(const ShrubberyCreationForm &copy);
     ShrubberyCreationForm operator=(const ShrubberyCreationForm &copy);
 
-    void execute() const;
+    void execute(Bureaucrat const &executor) const;
 };
 
 #endif
