@@ -1,6 +1,10 @@
 #ifndef AFORM_HPP
 #define AFORM_HPP
 
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
+
 #include "Bureaucrat.hpp"
 
 class AForm{
@@ -35,7 +39,7 @@ class AForm{
 			const char* what() const throw();
 		};
 
-		void execute(Bureaucrat const &executor) const = 0;
+		void virtual execute(Bureaucrat const &executor) const = 0;
 		
 };
 

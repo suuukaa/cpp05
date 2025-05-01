@@ -1,11 +1,11 @@
 #include "AForm.hpp"
 
-AForm::AForm(){}
+AForm::AForm() : name("Default"), gradeToSign(1), gradeToExecute(155) {}
 
 AForm::AForm(const AForm &copy): name(copy.name), isSigned(copy.isSigned),
     gradeToSign(copy.gradeToSign), gradeToExecute(copy.gradeToExecute){}
 
-AForm:AForm(const std::string& name, int gradeToSign, int gradeToExecute): name(name), isSigned(!isSigned),
+AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute): name(name), isSigned(!isSigned),
     gradeToSign(gradeToSign), gradeToExecute(gradeToExecute){
         if (gradeToExecute < 1 || gradeToSign < 1)
             throw GradeTooHighException();
@@ -13,7 +13,7 @@ AForm:AForm(const std::string& name, int gradeToSign, int gradeToExecute): name(
             throw GradeTooLowException();
 }
 
-AForm AForm::operator=(const AForm &copy){
+AForm &AForm::operator=(const AForm &copy){
     if (this != &copy)
         isSigned = copy.isSigned;
     return *this;
@@ -21,7 +21,7 @@ AForm AForm::operator=(const AForm &copy){
 
 AForm::~AForm(){};
 
-const std::string AForm::getName() const{
+const std::string &AForm::getName() const{
     return name;
 }
 
@@ -33,15 +33,15 @@ int AForm::getGradeToExecute() const{
     return gradeToExecute;
 }
 
-int AForm::gradeToSign() const{
+int AForm::getGradeToSign() const{
     return gradeToSign;
 }
 
 void AForm::beSigned(const Bureaucrat &b)
 {
-    if (b.getGrade() > _signgradeToSignGrade)
+    if (b.getGrade() > getGradeToSign())
         throw GradeTooLowException();
-        isSigned = true;
+    isSigned = true;
 }
 
 const char* AForm::GradeTooHighException::what() const throw(){
@@ -59,8 +59,8 @@ const char* AForm::FormNotSignedException::what() const throw () {
 std::ostream &operator<<(std::ostream &out, const AForm &f)
 {
     out << f.getName()
-        << ", Sign Grade: " << f.getSignGrade()
-        << ", Exec Grade: " << f.getExecGrade()
+        << ", Sign Grade: " << f.getGradeToSign()
+        << ", Exec Grade: " << f.getGradeToExecute()
         << ", Signed: " << (f.getIsSigned() ? "Yes" : "No");
     return out;
 }

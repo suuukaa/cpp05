@@ -1,14 +1,14 @@
-NAME = ex01
+NAME = ex02
 CC = c++ -std=c++98
 CFLAGS =  -Wall -Wextra -Werror
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 
 all: $(NAME)
 
 OBJ = $(SRC:.cpp=.o)
 
-%.o: %.cpp Bureaucrat.hpp Form.hpp
+%.o: %.cpp Bureaucrat.hpp AForm.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)

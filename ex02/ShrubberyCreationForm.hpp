@@ -1,7 +1,7 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
-#include <AForm.hpp>
+#include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm{
 
@@ -9,10 +9,10 @@ class ShrubberyCreationForm : public AForm{
 
     public :
     ShrubberyCreationForm();
-    ~ShrubberyCreationFor();
+    ~ShrubberyCreationForm();
     ShrubberyCreationForm(const ShrubberyCreationForm &copy);
-    ShrubberyCreationForm operator=(const ShrubberyCreationForm &copy);
-    ShrubberyCreationForm(const std::string target);
+    ShrubberyCreationForm &operator=(const ShrubberyCreationForm &copy);
+    ShrubberyCreationForm(const std::string &target);
 
     void execute(Bureaucrat const &executor) const;
 };

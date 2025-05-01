@@ -20,7 +20,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
     if (!getIsSigned())
         throw AForm::FormNotSignedException();
-    if (executor.getGrade() > getExecGrade())
+    if (executor.getGrade() > getGradeToExecute())
         throw AForm::GradeTooLowException();
 
     std::ofstream file((target + "_shrubbery").c_str());
@@ -35,7 +35,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
     file << "   /*/\\/\\/\\   " << std::endl;
     file << "  /\\O\\/\\*\\/\\  " << std::endl;
     file << " /\\*\\/\\*\\/\\/\\ " << std::endl;
-    file << "/\\O\\/\\/*/\\/O/\\" << std::endl;
+    file << "/\\O\\/\\/*/\\//\\" << std::endl;
     file << "      ||      " << std::endl;
     file << "      ||      " << std::endl;
     file << "      ||      " << std::endl;
