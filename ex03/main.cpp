@@ -1,29 +1,32 @@
-
+#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
-int main()
-{
-    try {
-        Bureaucrat boss("Boss", 1);
-        ShrubberyCreationForm shrub("Garden");
-        RobotomyRequestForm robot("Bender");
-        PresidentialPardonForm pardon("Arthur Dent");
+int main() {
+    Intern someRandomIntern;
+    AForm* form;
 
-        boss.signForm(shrub);
-        boss.executeForm(shrub);
+    std::cout << "\n--- Test 1: Create ShrubberyCreationForm ---" << std::endl;
+    form = someRandomIntern.makeForm("shrubbery creation", "Home");
+    if (form)
+        delete form;
 
-        boss.signForm(robot);
-        boss.executeForm(robot);
+    std::cout << "\n--- Test 2: Create RobotomyRequestForm ---" << std::endl;
+    form = someRandomIntern.makeForm("robotomy request", "Bender");
+    if (form)
+        delete form;
 
-        boss.signForm(pardon);
-        boss.executeForm(pardon);
-    }
-    catch (std::exception &e) {
-        std::cerr << e.what() << std::endl;
-    }
+    std::cout << "\n--- Test 3: Create PresidentialPardonForm ---" << std::endl;
+    form = someRandomIntern.makeForm("presidential pardon", "Rick");
+    if (form)
+        delete form;
+
+    std::cout << "\n--- Test 4: Invalid Form ---" << std::endl;
+    form = someRandomIntern.makeForm("invalid form name", "NoTarget");
+    if (form)
+        delete form;
 
     return 0;
 }
