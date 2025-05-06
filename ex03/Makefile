@@ -2,13 +2,14 @@ NAME = ex02
 CC = c++ -std=c++98
 CFLAGS =  -Wall -Wextra -Werror
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp \
+		RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 
 all: $(NAME)
 
 OBJ = $(SRC:.cpp=.o)
 
-%.o: %.cpp Bureaucrat.hpp AForm.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp
+%.o: %.cpp Bureaucrat.hpp AForm.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Intern.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
